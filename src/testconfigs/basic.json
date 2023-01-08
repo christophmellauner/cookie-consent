@@ -1,0 +1,26 @@
+{
+    "cookie": {
+        "domain": "localhost",
+        "expirationAmount": 90
+    },
+    "possibleCookies": [
+        {
+            "name": "necessary",
+            "description": "the necessary cookie category",
+            "required": true,
+            "cookiesToBlock": []
+        },
+        {
+            "name": "marketing",
+            "description": "the marketing cookie category",
+            "required": false,
+            "cookiesToBlock": [
+                {
+                    "name": "",
+                    "identifier": "",
+                    "expiration": 90
+                }
+            ]
+        }
+    ]
+}

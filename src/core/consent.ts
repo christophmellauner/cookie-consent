@@ -58,6 +58,10 @@ export class Consent {
         })
     }
 
+    getStatus(category: ConsentCookieCategory): boolean | null {
+        return readCookie(category.name)?.accepted
+    }
+
     accept(category: ConsentCookieCategory) {
         const index = this.acceptedCategories.findIndex(acceptedCategory => acceptedCategory.name === category.name) 
         if (index < 0) {
@@ -66,7 +70,7 @@ export class Consent {
             this.acceptedCategories.splice(index, 1, category)
         }
 
-        writeCookie(this.cookieName + "_" + category.name, this.acceptedCategories.map(category => category.name), this.config.cookie.expirationAmount);
+        writeCookie(this.cookieName + "_" + category.name, {accepted: true}, this.config.cookie.expirationAmount);
 
 
         const event = new CustomEvent("ConsentAccepted", {
@@ -82,7 +86,7 @@ export class Consent {
             this.acceptedCategories.splice(index, 1)
         }
 
-
+        console.log(category)
         deleteCookie(this.cookieName + "_" + category.name);
 
         category.cookiesToBlock.forEach(cookie => {

@@ -4,7 +4,7 @@
  * @param value Value of the cookie
  * @param expiration expiration Date
  */
-export const writeCookie = function (name: string, value: string[] | string, expirationAmount: number) {
+export const writeCookie = function (name: string, value: string[] | string | object, expirationAmount: number) {
     const expiration = new Date();
     expiration.setDate(expiration.getDate() + expirationAmount)
 
@@ -17,9 +17,12 @@ export const writeCookie = function (name: string, value: string[] | string, exp
  * @param name 
  * @returns 
  */
-export const readCookie = function (name: string) {
+export const readCookie = function (name: string): any | null {
     let result = document.cookie.match(new RegExp(name + "=([^;]+)"));
-    result && (result = JSON.parse(result[1]));
+    if (!result) {
+        return null
+    }
+    result = JSON.parse(result[1]);
     return result;
 }
 
