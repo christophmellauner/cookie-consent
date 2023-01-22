@@ -1,19 +1,23 @@
 import { Consent } from '../core/consent'
-import BasicConfig from '../testconfigs/basic.json'
+import config from '../testconfigs/basic.json'
 
-window.consent = new Consent("cookieconsent", BasicConfig)
+window.consent = new Consent("cookieconsent", config)
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <div id="cookieconsent" class="cookieconsent cookieconsent__position--right">
         <div class="cookieconsent__container">
+            <div class="cookieconsent__header">
+                <h3>${config.general.headline}</h3>
+                <p>${config.general.description}</p>
+            </div>
             <form id="cookieconsent__form">
                 <div class="cookieconsent__form__categories">
                 
                 </div>
                 <div class="cookieconsent__form__buttons">
                     <button>
-                        Save
+                        Speichern
                     </button>
                 </div>
             </form>
@@ -23,16 +27,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `
 
 
-const categories = BasicConfig.possibleCookies.map(category => {
+const categories = config.possibleCookies.map(category => {
     const categoryStatus = window.consent.getStatus(category)
     return `
         <div class="cookieconsent__form__category">
-            <div class="cookieconsent__form__category__heading">
+            <label class="cookieconsent__form__category__heading">
                 ${category.name}
                 <div class="cookieconsent__form__category__switch">
-                    <input name="category_${category.name}" type="checkbox" ${category.required ? 'checked="true" disabled' : (categoryStatus ? 'checked="true"': '')} />
+                    <input name="category_${category.id}" type="checkbox" ${category.required ? 'checked="true" disabled' : (categoryStatus ? 'checked="true"': '')} />
                 </div>
-            </div>
+            </label>
             <div class="cookieconsent__form__category__details">
                 ${category.description}
             </div>
@@ -48,8 +52,8 @@ const formElement = document.querySelector<HTMLFormElement>('#cookieconsent__for
 formElement?.addEventListener("submit", function (e: Event) {
     e.preventDefault();
     e.stopPropagation();
-    BasicConfig.possibleCookies.forEach(category => {
-        const checkbox = formElement!.elements.namedItem("category_" + category.name) as HTMLInputElement
+    config.possibleCookies.forEach(category => {
+        const checkbox = formElement!.elements.namedItem("category_" + category.id) as HTMLInputElement
         console.log(checkbox.checked)
         if (checkbox && checkbox.checked) {
             window.consent.accept(category)

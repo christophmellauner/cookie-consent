@@ -1,10 +1,11 @@
 export interface ConsentCookie {
     name: string;
-    identifier: string;
+    identifiers: string[];
     expiration: number;
 }
 
 export interface ConsentCookieCategory {
+    id: string;
     name: string;
     description?: string;
     cookiesToBlock: ConsentCookie[];
@@ -13,6 +14,10 @@ export interface ConsentCookieCategory {
 }
 
 export interface ConsentConfig {
+    general: {
+        headline: string;
+        description: string;
+    }
     cookie: {
         domain: string;
         expirationAmount: number;
