@@ -1,5 +1,5 @@
 import { ConsentConfig, ConsentCookieCategory } from "./config"
-import { deleteCookie, readCookie, writeCookie } from "./utils/cookie";
+import { deleteCookie, deleteCookies, readCookie, writeCookie } from "./utils/cookie";
 
 
 export class Consent {
@@ -90,7 +90,7 @@ export class Consent {
         deleteCookie(this.cookieName + "_" + category.name);
 
         category.cookiesToBlock.forEach(cookie => {
-            deleteCookie(cookie.identifier)
+            deleteCookies(cookie.identifiers)
         })
         const event = new CustomEvent("ConsentDenied", {
             detail: category.name

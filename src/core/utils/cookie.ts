@@ -27,5 +27,13 @@ export const readCookie = function (name: string): any | null {
 }
 
 export const deleteCookie = function (name: string) {
-    document.cookie = name + "=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=." + window.location.host.toString().replace("www.", "");
+    let host = window.location.host.toString().replace("www.", "")
+    document.cookie = name + "=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=." + host.startsWith("localhost") ? "localhost" : host;
+}
+
+export const deleteCookies = function (names: string[]) {
+    for (let i = 0; i < names.length; i++) {
+        deleteCookie(names[i])
+        
+    }
 }
