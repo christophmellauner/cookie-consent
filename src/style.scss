@@ -1,20 +1,19 @@
 $padding: 1rem;
 
-:root {
+
+.cookieconsent {
     --primary-color: #e8f3d6;
     --secondary-color: #ffdca9;
     --accent-color: #faab78;
-
+    
     --padding: #{$padding};
+    box-sizing: border-box;
 }
 
 .cookieconsent h3 {
     margin-top: 0;
 }
 
-.cookieconsent {
-    box-sizing: border-box;
-}
 
 .cookieconsent {
     position: fixed;
