@@ -1,7 +1,7 @@
 import { Consent } from '../core/consent'
 import config from '../testconfigs/basic.json'
 
-window.consent = new Consent("cookieconsent", config)
+window.consent = new Consent(config)
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>

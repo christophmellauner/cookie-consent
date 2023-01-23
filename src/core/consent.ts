@@ -13,12 +13,12 @@ export class Consent {
     allAcceptedEvent?: CustomEvent;
     allDeniedEvent?: CustomEvent;
 
-    constructor(elementName: string, config: ConsentConfig) {
+    constructor(config: ConsentConfig) {
         this.config = config
         this.filterAcceptedCookieCategories()
         
         document.addEventListener("DOMContentLoaded", () => {
-            this.element = document.querySelector(elementName)
+            this.element = document.body
             this.initEvents()
         })
     }
