@@ -15,11 +15,10 @@ export class Consent {
 
     constructor(elementName: string, config: ConsentConfig) {
         this.config = config
-
+        this.filterAcceptedCookieCategories()
         
         document.addEventListener("DOMContentLoaded", () => {
             this.element = document.querySelector(elementName)
-            this.filterAcceptedCookieCategories()
             this.initEvents()
         })
     }
